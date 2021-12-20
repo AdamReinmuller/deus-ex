@@ -110,7 +110,7 @@ export default function useCandyMachine() {
           "singleGossip",
           false
         );
-
+        // @ts-ignore
         if (!status?.err) {
           toast.success(
             "Congratulations! Mint succeeded! Check your wallet :)"
@@ -183,6 +183,7 @@ export default function useCandyMachine() {
 
         for (let index = 0; index < allTransactionsResult.length; index++) {
           const transactionStatus = allTransactionsResult[index];
+          // @ts-ignore
           if (!transactionStatus?.err) {
             totalSuccess += 1;
           } else {

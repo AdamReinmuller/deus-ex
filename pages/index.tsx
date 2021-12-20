@@ -118,15 +118,15 @@ export default function Home() {
     mintStartDate,
     isMinting,
     startMint,
-    startMintMultiple,
+    // startMintMultiple,
     nftsData,
   } = useCandyMachine();
 
-  const [isLoading, nfts] = useWalletNfts();
+  const [_isLoading, nfts] = useWalletNfts();
 
   const { connected } = useWallet();
 
-  const [isMintLive, setIsMintLive] = useState(false);
+  const [_isMintLive, setIsMintLive] = useState(false);
 
   useEffect(() => {
     if (new Date(mintStartDate).getTime() < Date.now()) {
