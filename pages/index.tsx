@@ -1,7 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Head from "next/head";
-import { FC, useEffect, useState } from "react";
+import Image from "next/image";
+import { FC, useCallback, useEffect, useState } from "react";
 import {
+  Box,
   Button,
   ComponentWithAs,
   Flex,
@@ -60,6 +62,15 @@ const Social = ({ Icon }: SocialProps) => {
       variant="outline"
       h="initial"
       p={3}
+      _hover={{
+        borderColor: "gold.500",
+        color: "gold.500",
+      }}
+      _active={{
+        borderColor: "gold.600",
+        color: "gold.600",
+      }}
+      transition="all linear 0.2s"
       // TODO: onclick link a
     >
       <Icon boxSize={6} />
@@ -68,6 +79,14 @@ const Social = ({ Icon }: SocialProps) => {
 };
 
 const Header: FC = () => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+
+  const resetStyle = useCallback(() => {
+    setIsHovered(false);
+    setIsActive(false);
+  }, []);
+
   return (
     <Flex p={8} justify="space-between" align="center">
       <Stack direction="row" spacing={2}>
@@ -75,14 +94,18 @@ const Header: FC = () => {
         <Social Icon={DiscordIcon} link="asd" />
         <Social Icon={GithubIcon} link="asd" />
       </Stack>
-      <Stack
+      <Flex
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseDown={() => setIsActive(true)}
+        onMouseUp={() => setIsActive(false)}
+        onMouseLeave={resetStyle}
         position="relative"
         sx={{
           ".wallet-adapter-button": {
-            color: "white",
-            backgroundColor: "veil.1",
+            color: isActive ? "gold.600" : isHovered ? "gold.500" : "white",
+            height: "44px",
+            backgroundColor: "blue.700",
             borderRadius: "0",
-            border: "1px solid white",
             marginTop: "0px",
             paddingLeft: "24px",
             paddingRight: "24px",
@@ -90,13 +113,26 @@ const Header: FC = () => {
             fontWeight: "500",
             textTransform: "uppercase",
             letterSpacing: "3px",
+            transition: "all linear 0.2s",
             clipPath:
-              "polygon(7% 0, 100% 0, 100% 60%, 93% 100%, 0 100%, 0 40%)",
+              "polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px)",
           },
         }}
       >
         <WalletMultiButton />
         <Flex
+          position="absolute"
+          left="-1px"
+          top="-1px"
+          w="calc(100% + 2px)"
+          h="calc(100% + 2px)"
+          // mixBlendMode="darken"
+          bg={isActive ? "gold.600" : isHovered ? "gold.500" : "white"}
+          clipPath="polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px)"
+          zIndex={-1}
+          transition="all linear 0.2s"
+        />
+        {/* <Flex
           position="absolute"
           mt="0px !important"
           top={0}
@@ -105,8 +141,8 @@ const Header: FC = () => {
           w="100%"
           h="100%"
           filter="blur(8px)"
-        />
-      </Stack>
+        />  */}
+      </Flex>
     </Flex>
   );
 };
@@ -147,7 +183,33 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Flex w="100vw" h="100vh" direction="column" position="relative">
+      <Flex
+        w="100vw"
+        h="100vh"
+        direction="column"
+        position="relative"
+        sx={{
+          ".bgImage": {
+            zIndex: -2,
+          },
+        }}
+      >
+        <Image
+          src="/images/background.jpg"
+          layout="fill"
+          objectFit="cover"
+          alt="backround image"
+          className="bgImage"
+        />
+        <Box
+          left={0}
+          top={0}
+          position="absolute"
+          h="100%"
+          w="100%"
+          zIndex={-1}
+          background="linear-gradient(to bottom, transparent, black)"
+        />
         <Header />
         <Toaster />
         <div className="flex flex-col items-center min-h-screen mx-6">
