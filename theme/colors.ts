@@ -40,7 +40,7 @@ const colors = {
     "4": "rgba(255, 255, 255, 0.4)",
     "8": "rgba(255, 255, 255, 0.8)",
   },
-  background: "#0F162A",
+  background: "#0A0A0A",
   footer: "#0F162A",
   backdrop: "rgba(0, 0, 0, 0.8)",
   blockquote: "#ffefef",
