@@ -19,7 +19,12 @@ import useCandyMachine from "../hooks/useCandyMachine";
 import useWalletBalance from "../hooks/useWalletBalance";
 import useWalletNfts from "../hooks/useWalletNFTs";
 import AnNFT from "../components/AnNFT/AnNFT";
-import { DiscordIcon, GithubIcon, TwitterIcon } from "../components/icons";
+import {
+  DiscordIcon,
+  GithubIcon,
+  SacredIcon,
+  TwitterIcon,
+} from "../components/icons";
 
 // const MintMany = () => {
 //   const [mintCount, setMintCount] = useState(5);
@@ -48,33 +53,42 @@ import { DiscordIcon, GithubIcon, TwitterIcon } from "../components/icons";
 //   );
 // };
 
+const Title = () => {
+  return (
+    <Flex justify="center" align="center" w="100%" h="100%">
+      <SacredIcon boxSize={320} />
+    </Flex>
+  );
+};
+
 type SocialProps = {
-  link: string;
+  href: string;
   Icon: ComponentWithAs<"svg", IconProps>;
 };
 
-const Social = ({ Icon }: SocialProps) => {
+const Social = ({ Icon, href }: SocialProps) => {
   return (
-    <Button
-      borderRadius={0}
-      borderColor="white"
-      color="white"
-      variant="outline"
-      h="initial"
-      p={3}
-      _hover={{
-        borderColor: "gold.500",
-        color: "gold.500",
-      }}
-      _active={{
-        borderColor: "gold.600",
-        color: "gold.600",
-      }}
-      transition="all linear 0.2s"
-      // TODO: onclick link a
-    >
-      <Icon boxSize={6} />
-    </Button>
+    <a href={href} target="_blank" rel="noopener noreferrer">
+      <Button
+        borderRadius={0}
+        borderColor="white"
+        color="white"
+        variant="outline"
+        h="initial"
+        p={3}
+        _hover={{
+          borderColor: "gold.500",
+          color: "gold.500",
+        }}
+        _active={{
+          borderColor: "gold.600",
+          color: "gold.600",
+        }}
+        transition="all linear 0.2s"
+      >
+        <Icon boxSize={6} />
+      </Button>
+    </a>
   );
 };
 
@@ -90,9 +104,9 @@ const Header: FC = () => {
   return (
     <Flex p={8} justify="space-between" align="center">
       <Stack direction="row" spacing={2}>
-        <Social Icon={TwitterIcon} link="asd" />
-        <Social Icon={DiscordIcon} link="asd" />
-        <Social Icon={GithubIcon} link="asd" />
+        <Social Icon={TwitterIcon} href="https://twitter.com/deusexsol" />
+        <Social Icon={DiscordIcon} href="asd" />
+        <Social Icon={GithubIcon} href="asd" />
       </Stack>
       <Flex
         onMouseEnter={() => setIsHovered(true)}
@@ -132,16 +146,6 @@ const Header: FC = () => {
           zIndex={-1}
           transition="all linear 0.2s"
         />
-        {/* <Flex
-          position="absolute"
-          mt="0px !important"
-          top={0}
-          zIndex={-1}
-          left={0}
-          w="100%"
-          h="100%"
-          filter="blur(8px)"
-        />  */}
       </Flex>
     </Flex>
   );
@@ -212,6 +216,7 @@ export default function Home() {
         />
         <Header />
         <Toaster />
+        <Title />
         <div className="flex flex-col items-center min-h-screen mx-6">
           <div className="flex items-center justify-between w-full mt-3">
             <h1 className="text-2xl font-bold">next-candy-machine</h1>
@@ -252,18 +257,20 @@ export default function Home() {
                       <>
                         <div className="flex flex-col w-1/2">
                           <h1 className="mb-10 text-3xl font-bold">Mint One</h1>
-                          <button
+                          <Button
                             onClick={startMint}
                             disabled={isMinting}
                             className="px-4 py-2 mx-auto font-bold text-white transition-opacity rounded-lg hover:opacity-70 bg-gradient-to-br from-green-300 via-blue-500 to-purple-600"
                           >
                             {isMinting ? "loading" : "mint 1"}
-                          </button>
+                          </Button>
                         </div>
-                        {/* <div className="flex flex-col w-1/2">
-                        <h1 className="mb-10 text-3xl font-bold">Mint Many</h1> */}
-                        {/* <MintMany /> */}
-                        {/* </div> */}
+                        <div className="flex flex-col w-1/2">
+                          <h1 className="mb-10 text-3xl font-bold">
+                            Mint Many
+                          </h1>
+                          {/* <MintMany /> */}
+                        </div>
                       </>
                     )}
                   </>
