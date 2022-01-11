@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { Box } from "@chakra-ui/react";
 
 import { Introduction, Landing } from "../components/Home";
 import { QUANTITY } from "../utils/consts";
@@ -15,10 +16,12 @@ const Home = () => {
         />
         // TODO: favicon
         <link rel="icon" href="/favicon.ico" />
-        
       </Head>
-      <Landing />
-      <Introduction />
+
+      <Box overflow="hidden" mx="auto">
+        <Landing />
+        <Introduction />
+      </Box>
     </>
   );
 };

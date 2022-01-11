@@ -11,7 +11,7 @@ import useWalletBalance from "../../hooks/useWalletBalance";
 import useWalletNfts from "../../hooks/useWalletNFTs";
 
 import AnNFT from "../AnNFT/AnNFT";
-import { SacredIcon } from "../icons";
+import { LogoIcon, SacredIcon } from "../icons";
 import { Header } from "./Header";
 
 // const MintMany = () => {
@@ -53,7 +53,7 @@ const Title = () => {
       w="100%"
       h="100%"
     >
-      <SacredIcon boxSize="57%" />
+      <LogoIcon boxSize="57%" />
     </Flex>
   );
 };
@@ -83,6 +83,7 @@ export const Landing = () => {
 
   return (
     <Flex
+      overflow="hidden"
       w="100vw"
       h="100vh"
       direction="column"
