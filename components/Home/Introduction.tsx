@@ -3,6 +3,7 @@ import { FC } from "react";
 import Image from "next/image";
 
 import { QUANTITY } from "../../utils/consts";
+import Perspective from "../Effect/Perspective";
 
 export const Introduction: FC = () => {
   return (
@@ -37,12 +38,7 @@ export const Introduction: FC = () => {
           </Text>
         </Flex>
 
-        <Flex
-          display={["none", "none", "flex"]}
-          position="relative"
-          w="45%"
-          h={500}
-        >
+        <Perspective>
           <Image
             layout="fill"
             objectFit="contain"
@@ -50,7 +46,7 @@ export const Introduction: FC = () => {
             alt="deity poster"
             draggable="false"
           />
-        </Flex>
+        </Perspective>
       </Flex>
 
       <Box w="90%" ml="auto" pt="10%" position="relative">
