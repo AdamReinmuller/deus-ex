@@ -22,7 +22,14 @@ export const Introduction: FC = () => {
         textAlign={["center", "center", "initial"]}
       >
         <Flex direction="column" w="45%" color="white" mr={[0, 0, 16]}>
-          <Heading lineHeight={1} fontSize={80} fontWeight="bold">
+          <Heading
+            backgroundImage=" radial-gradient(closest-side, #FFD037, #8D6932);"
+            backgroundSize="100%"
+            backgroundClip="text"
+            lineHeight={1}
+            fontSize={80}
+            fontWeight="bold"
+          >
             {QUANTITY}
           </Heading>
           <Text lineHeight={1} fontSize={64} fontWeight="normal" mb={8}>
