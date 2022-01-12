@@ -1,5 +1,18 @@
 import { createIcon } from "@chakra-ui/icons";
 
+export const TriangleIcon = createIcon({
+  displayName: "triangle",
+  viewBox: "0 0 36 30",
+  // path can also be an array of elements, if you have multiple paths, lines, shapes, etc.
+  path: (
+    <path
+      d="M34.8875 0.250004L18 29.5L1.11251 0.250001L34.8875 0.250004Z"
+      stroke="currentColor"
+      strokeWidth="1"
+    />
+  ),
+});
+
 export const TwitterIcon = createIcon({
   displayName: "twitter",
   viewBox: "0 0 24 20",

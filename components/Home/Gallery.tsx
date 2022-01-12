@@ -1,7 +1,8 @@
 import React, { FC, useCallback, useState } from "react";
 import Image from "next/image";
-import { Flex, FlexProps } from "@chakra-ui/react";
+import { Flex, FlexProps, Box } from "@chakra-ui/react";
 import { motion, PanInfo } from "framer-motion";
+import { TriangleIcon } from "../icons";
 
 const MotionFlex = motion<FlexProps>(Flex);
 
@@ -25,13 +26,12 @@ const Card: FC<CardProps> = ({ image, index, current, onClick }) => {
       initial={{
         scale: 0,
         left: 0,
-        top: "50%",
-        translateY: "-50%",
+        top: 0,
       }}
       animate={{
         scale: isCurrent ? 1 : background.scale,
         left: "50%",
-        opacity: isCurrent ? 1 : 0.5,
+        opacity: isCurrent ? 1 : 0.6,
         rotateY: isCurrent
           ? "0deg"
           : `${(index - current) * background.rotation}deg`,
@@ -44,24 +44,31 @@ const Card: FC<CardProps> = ({ image, index, current, onClick }) => {
       align="center"
       position="absolute"
       onClick={() => onClick(index)}
-      w="30%"
+      w="420px"
       h="420px"
-      py={8}
-      px={4}
-      bg="gray.600"
+      cursor="grabbing"
       sx={{
         "> *": {
           userSelect: "none",
         },
       }}
     >
-      <Image
-        layout="fill"
-        objectFit="contain"
-        src={`/images/gallery/${image}`}
-        alt="gallery image"
-        draggable="false"
-      />
+      <Box
+        position="relative"
+        w="100%"
+        h="100%"
+        borderWidth={isCurrent ? 1 : 0}
+        borderStyle="solid"
+        borderColor="gold.500"
+      >
+        <Image
+          layout="fill"
+          objectFit="contain"
+          src={`/images/gallery/${image}`}
+          alt="gallery image"
+          draggable="false"
+        />
+      </Box>
     </MotionFlex>
   );
 };
@@ -100,27 +107,60 @@ export const Gallery: FC<GalleryProps> = ({ images }) => {
   );
 
   return (
-    <MotionFlex
-      onPanEnd={onPanEnd}
-      overflow="hidden"
-      onPanStart={() => setIsPanned(true)}
-      style={{ perspective: "1000px", touchAction: "pan-x" }}
-      align="center"
-      justify="center"
-      position="relative"
-    >
-      {images.map((image, i) => {
-        return (
-          // eslint-disable-next-line react/no-array-index-key
-          <Card
-            onClick={onClick}
-            image={image}
-            current={current}
-            key={i}
-            index={i}
-          />
-        );
-      })}
-    </MotionFlex>
+    <Flex direction="column" justify="center" align="center" mb={36}>
+      <MotionFlex
+        onPanEnd={onPanEnd}
+        // overflow="hidden"
+        onPanStart={() => setIsPanned(true)}
+        style={{ perspective: "1000px", touchAction: "pan-x" }}
+        mb={12}
+        align="center"
+        justify="center"
+        position="relative"
+        h={420}
+      >
+        {images.map((image, i) => {
+          return (
+            <Card
+              onClick={onClick}
+              image={image}
+              current={current}
+              key={image}
+              index={i}
+            />
+          );
+        })}
+      </MotionFlex>
+
+      <Flex align="center">
+        <TriangleIcon
+          cursor="pointer"
+          boxSize={8}
+          color={current === 0 ? "gold.600" : "gold.500"}
+          transform="rotate(90deg)"
+          mr={4}
+          onClick={() => current > 0 && setCurrent((value) => value - 1)}
+        />
+        {images.map((_, index) => (
+          <Box py={3} onClick={() => setCurrent(index)} cursor="pointer">
+            <Box
+              mr={4}
+              h="1px"
+              w={8}
+              bg={index === current ? "gold.500" : "gold.600"}
+            />
+          </Box>
+        ))}
+        <TriangleIcon
+          cursor="pointer"
+          boxSize={8}
+          color={current + 1 === images.length ? "gold.600" : "gold.500"}
+          transform="rotate(-90deg)"
+          onClick={() =>
+            current + 1 < images.length && setCurrent((value) => value + 1)
+          }
+        />
+      </Flex>
+    </Flex>
   );
 };
