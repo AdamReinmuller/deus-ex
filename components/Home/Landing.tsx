@@ -43,6 +43,7 @@ import { Header } from "./Header";
 const Title = () => {
   return (
     <Flex
+      pointerEvents="none"
       direction="column"
       position="absolute"
       bottom={-12}
@@ -112,7 +113,6 @@ export const Landing = () => {
         background="linear-gradient(to bottom, transparent, black)"
       />
       <Header />
-      <Toaster />
       <Title />
       <div className="flex flex-col items-center min-h-screen mx-6">
         <div className="flex items-center justify-between w-full mt-3">
@@ -190,6 +190,7 @@ export const Landing = () => {
           </div>
         </div>
       </div>
+      <Toaster />
     </Flex>
   );
 };
