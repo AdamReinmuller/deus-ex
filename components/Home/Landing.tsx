@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Flex, Button, Box, Container } from "@chakra-ui/react";
+import { Flex, Button, Box } from "@chakra-ui/react";
 import Image from "next/image";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useState, useEffect } from "react";
@@ -11,7 +11,7 @@ import useWalletBalance from "../../hooks/useWalletBalance";
 import useWalletNfts from "../../hooks/useWalletNFTs";
 
 import AnNFT from "../AnNFT/AnNFT";
-import { LogoIcon, SacredIcon } from "../icons";
+import { LogoIcon } from "../icons";
 import { Header } from "./Header";
 
 // const MintMany = () => {
