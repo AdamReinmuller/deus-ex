@@ -1,11 +1,13 @@
 import { Heading, Text, Flex, Box } from "@chakra-ui/react";
-import { FC } from "react";
+import { FC, useState } from "react";
 import Image from "next/image";
 
 import { QUANTITY } from "../../utils/consts";
 import Perspective from "../Effect/Perspective";
 
 export const Introduction: FC = () => {
+  const [isHover, setIsHover] = useState(false);
+
   return (
     <Flex direction="column" align="center" justify="center" mb={32}>
       <Flex
@@ -49,7 +51,14 @@ export const Introduction: FC = () => {
         </Perspective>
       </Flex>
 
-      <Box w="90%" ml="auto" pt="10%" position="relative">
+      <Box
+        w="90%"
+        ml="auto"
+        pt="10%"
+        position="relative"
+        onMouseEnter={() => setIsHover(true)}
+        onMouseLeave={() => setIsHover(false)}
+      >
         <Image
           layout="fill"
           objectFit="contain"
@@ -58,6 +67,17 @@ export const Introduction: FC = () => {
           alt="spear image"
           draggable="false"
         />
+        //TODO: real image
+        <Box opacity={isHover ? 1 : 0} transition="all 1s linear">
+          <Image
+            layout="fill"
+            objectFit="contain"
+            objectPosition="right"
+            src="/images/spear1.png"
+            alt="spear glowing"
+            draggable="false"
+          />
+        </Box>
       </Box>
     </Flex>
   );
